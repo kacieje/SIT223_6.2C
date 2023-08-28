@@ -9,24 +9,24 @@ pipeline {
         
         stage('Unit and Integration Tests') {
             steps {
-                echo "Run unit tests to ensure code functions as expected and run 
-                integration tests to ensure the different components work as expected"
+                echo "Run unit tests to ensure code functions as expected and run"
+                echo "integration tests to ensure the different components work as expected"
                 echo "specify the test automation tools"
             }
-            post{
-                success{
-                    mail to: "kjeaton@deakin.edu.au"
-                    subject: "SIT223_6.2C Test Status Email"
+            post {
+                success {
+                    emailext attachLog: true,
+                    to: "kjeaton@deakin.edu.au",
+                    subject: "SIT223_6.2C Test Status Email",
                     body: "Integration and Unit testing was successful"
-                    attachLog: True
                 }
-                failure{
-                    mail to: "kjeaton@deakin.edu.au"
-                    subject: "SIT223_6.2C Test Status Email"
+                failure {
+                    emailext attachLog: true,
+                    to: "kjeaton@deakin.edu.au",
+                    subject: "SIT223_6.2C Test Status Email",
                     body: "Integration and Unit testing failed"
-                    attachLog: True
                 }
-        }
+            }
         }
         
         stage('Code Analysis') {
@@ -41,27 +41,26 @@ pipeline {
                 echo "perform security scan on the code using tool to identify vulnerabilities"
                 echo "research and select a tool to scan your code"
             }
-            post{
-                success{
-                    mail to: "kjeaton@deakin.edu.au"
-                    subject: "SIT223_6.2C Security Scan Status Email"
+            post {
+                success {
+                    emailext attachLog: true,
+                    to: "kjeaton@deakin.edu.au",
+                    subject: "SIT223_6.2C Security Scan Status Email",
                     body: "Security Scan was successful"
-                    attachLog: True
-
                 }
-                failure{
-                    mail to: "kjeaton@deakin.edu.au"
-                    subject: "SIT223_6.2C Security Scan Status Email"
+                failure {
+                    emailext attachLog: true,
+                    to: "kjeaton@deakin.edu.au",
+                    subject: "SIT223_6.2C Security Scan Status Email",
                     body: "Security Scan failed"
-                    attachLog: True
                 }
-        }
+            }
         }
         
         stage('Integration Tests on Staging') {
             steps {
-                echo "run integration tests on the staging environment to 
-                ensure application functions as expected in a production-like environment"
+                echo "run integration tests on the staging environment to"
+                echo "ensure application functions as expected in a production-like environment"
             }
         }
         
@@ -70,6 +69,5 @@ pipeline {
                 echo "Deploy the code to a production server i.e. AWS EC2 instance"
             }
         }
-
     }
 }
