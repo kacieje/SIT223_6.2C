@@ -3,15 +3,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Build code using a build automation tool to compile and package code"
+                echo "Build automation through Maven"
             }        
         }
         
         stage('Unit and Integration Tests') {
             steps {
-                echo "Run unit tests to ensure code functions as expected and run"
-                echo "integration tests to ensure the different components work as expected"
-                echo "specify the test automation tools"
+                echo "Unit and Integration testing through Cypress"
             }
             post {
                 success {
@@ -31,15 +29,13 @@ pipeline {
         
         stage('Code Analysis') {
             steps {
-                echo "integrate code analysis tool to analyse the code to meet industry standards"
-                echo "Research and select a tool to analyse your code using Jenkins"
+                echo "Code analysis through PMD"
             }
         }
        
         stage('Security Scan') {
             steps {
-                echo "perform security scan on the code using tool to identify vulnerabilities"
-                echo "research and select a tool to scan your code"
+                echo "Perform security scan through Snyk Security"
             }
             post {
                 success {
@@ -56,20 +52,23 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploy to AWS EC2 Staging"
+            }
+        }
+          
         stage('Integration Tests on Staging') {
             steps {
-                echo "run integration tests on the staging environment to"
-                echo "ensure application functions as expected in a production-like environment"
+                echo "Run staging integration tests"
             }
         }
         
         stage('Deploy to Production') {
             steps {
-                echo "Deploy the code to a production server i.e. AWS EC2 instance"
+                echo "Deploy to AWS EC2 Production"
             }
         }
     }
 }
-//edit for polling #3
-//edit for poll
